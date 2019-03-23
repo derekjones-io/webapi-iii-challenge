@@ -27,4 +27,17 @@ server.get('/users', (req, res) => {
     });
 });
 
+server.get('/users/:id', (req, res) => {
+  const { id } = req.params;
+
+  userDb
+    .getById(id)
+    .then(user => {
+      res.status(200).json(user);
+    })
+    .catch(err => {
+      res.status(500).json({ err: 'error getting user' });
+    });
+});
+
 module.exports = server;
