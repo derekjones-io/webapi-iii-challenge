@@ -16,4 +16,15 @@ server.get('/', (req, res) => {
   `);
 });
 
+server.get('/users', (req, res) => {
+  userDb
+    .get()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(err => {
+      res.status(500).json({ err: 'error getting users' });
+    });
+});
+
 module.exports = server;
