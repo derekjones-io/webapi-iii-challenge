@@ -40,4 +40,17 @@ server.get('/users/:id', (req, res) => {
     });
 });
 
+server.post('/users', (req, res) => {
+  const newUser = req.body;
+
+  userDb
+    .insert(newUser)
+    .then(user => {
+      res.status(201).json(user);
+    })
+    .catch(err => {
+      res.status(500).json({ err: 'error adding user' });
+    });
+});
+
 module.exports = server;
